@@ -1,0 +1,11 @@
+[{  
+  "id": "db4d8d67-1343-47aa-b7fd-73e706c49c7a",
+  "user": {
+    "name": "amyrobson",
+    "photo":"/src/assets/images/other-user.png"
+  },
+  "replies": [],
+  "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse,cupiditate neque quas!",
+  "isLiked": false,
+  "date": "2024-04-01"
+}]

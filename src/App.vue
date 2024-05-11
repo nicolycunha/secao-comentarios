@@ -1,38 +1,43 @@
 <template>
-  <section class="flex flex-col gap-6 items-center justify-center h-screen">
-    <Comment
-      v-for="commentary in commentaries"
-      :key="commentary.id"
-      :commentary="commentary"
-      @handleLike="handleLike(commentary)"
+  <section
+    class="flex flex-col gap-6 items-center justify-center min-h-screen py-4"
+  >
+    <CommentComponent
+      v-for="comment in comments"
+      :key="comment.id"
+      :comment="comment"
+      @handleLike="handleLike(comment)"
+      @sendSubComment="sendSubComment"
     />
-    <NewComment />
+    <NewComment @sendComment="sendComment" />
   </section>
 </template>
 
 <script setup lang="ts">
-import Comment from "./components/Comment.vue";
+import CommentComponent from "./components/Comment.vue";
 import NewComment from "./components/NewComment.vue";
-import { v4 as uuidv4 } from "uuid";
-import { Commentary } from "./interfaces/Commentary";
+//import { v4 as uuidv4 } from "uuid";
+import { IComment } from "./interfaces/Comment";
 import { reactive } from "vue";
+//import comments from "@/mock/comments.json";
 
-const commentaries = reactive<Commentary[]>([
-  {
-    id: uuidv4(),
-    image: "/src/assets/images/user.png",
-    name: "amyrobson",
-    replies: [],
-    comment:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse,cupiditate neque quas!",
-    isLiked: false,
-    date: new Date("2024-04-01"),
-  },
-]);
+const comments = reactive<IComment[]>([]);
 
-function handleLike(commentary: Commentary) {
-  commentary.isLiked = !commentary.isLiked;
-  console.log(commentary.isLiked);
+//function getComments() {
+  //comments.value = comments
+//}
+
+function handleLike(comment: IComment) {
+  comment.isLiked = !comment.isLiked;
+}
+
+function sendComment(comment: IComment) {
+  comments.push(Object.assign({}, comment));
+  console.log(comments.values);
+}
+
+function sendSubComment(subComment: IComment, comment: IComment) {
+  comment.replies.push(Object.assign({}, subComment));
 }
 </script>
 
